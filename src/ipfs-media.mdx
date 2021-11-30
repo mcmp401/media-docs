@@ -3,8 +3,6 @@ id: ipfs-media
 title: dCDN Integration
 ---
 
-### Adding your IPFS gateway to Media Network
-
 To scale up your IPFS gateway to million of users and make it available through a community-powered CDN, you can register your IPFS gateway as a resource on Media Network using the Media App front-end in 2 easy steps.
 
 We're assuming you've already have your SPL wallet loaded with some SOL to pay for transactions fees, and at least the equivalent of 25 MEDIA (LP Tokens from Raydium's MEDIA-USDC pool count towards this) in order to use the CDN service.
@@ -16,9 +14,6 @@ You can check what is running in each port by exectuing the following command:
 
 ```bash
 netstat -ntpl
-```
-
-```bash
 Active Internet connections (only servers)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
 tcp        0      0 127.0.0.1:5001          0.0.0.0:*               LISTEN      14732/ipfs          
@@ -33,15 +28,13 @@ tcp6       0      0 :::5432                 :::*                    LISTEN      
 tcp6       0      0 :::4001                 :::*                    LISTEN      14732/ipfs 
 ```
 
+
 In this case we can check that the IPFS HTTP gateway is running on port ***8080*** under PID ***14732***
 
 Now let's check the external IP address of your device:
 
 ```bash
 ifconfig
-```
-
-```bash
 eno1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 141.120.114.66  netmask 255.255.255.0  broadcast 141.120.114.66
         inet6 fe80::2eea:7fff:fef0:f2fe  prefixlen 64  scopeid 0x20<link>
@@ -51,9 +44,7 @@ eno1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         TX packets 4943558  bytes 970078005 (925.1 MiB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
         device interrupt 49  
-
 ```
-
 In this case, we can check that the external IP address is ***141.120.114.66*** using the ***eno1*** interface.
 
 This means your IPFS gateway is running at the following URL, which is what you'll need to add as a CDN resource:
@@ -86,12 +77,8 @@ If everything went smoothly and the transaction was approved and confirmed, you'
 <iframe frameborder="0" src="/html/ipfs-added.html" width="100%" height="530px"></iframe>
 
 :::note
-You can now access any content hosted on IPFS, served by Media Network's CDN, including the previously added [`mytextfile.txt`](ipfs-setup#adding-files-to-ipfs), through your **own** IPFS Gateway: `https://3ashhppttp.medianet.work`
+You can now serve any content hosted on IPFS to your end-users, through your **own** IPFS Gateway via Media's dCDN.
 :::
 
 
-### IPFS Example Links
 
-[mytextfile.txt](https://3ashhppttp.medianet.work/ipfs/QmS7S76K81Qq5AeHFN5tPL8uDhY3NCCSSSBAD4xaMAq87m) <br/>
-[Wikipedia](https://3ashhppttp.medianet.work/ipfs/bafybeiaysi4s6lnjev27ln5icwm6tueaw2vdykrtjkwiphwekaywqhcjze) <br/>
-[Project Apollo](https://3ashhppttp.medianet.work/ipfs/QmSnuWmxptJZdLJpKRarxBMS2Ju2oANVrgbr2xWbie9b2D/frontend/frontend.html)

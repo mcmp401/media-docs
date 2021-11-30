@@ -16,19 +16,23 @@ By default, your IPFS HTTP gateway is not exposed to the world. It only works lo
 ```bash
 sudo ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
 ```
-Please restart the IPFS daemon in order to changes to apply.
+
+:::note
+You'll need to restart the IPFS daemon with `sudo ipfs daemon` in order to changes to apply.
+:::
+
 
 ### Accessing your HTTP Gateway
 
-Check with curl command if IPFS HTTP gateway is accessible by trying to download the previously added [`mytextfile.txt`](ipfs-setup#adding-files-to-ipfs)
+Check with curl command if IPFS HTTP gateway is accessible by trying to download a file from the IPFS network.
 
 ```bash
 curl http://localhost:8080/ipfs/QmS7S76K81Qq5AeHFN5tPL8uDhY3NCCSSSBAD4xaMAq87m
 ```
-If everything works smoothly, you should get this:
+If everything works smoothly, you should get the content of that file:
 
 ```bash
 IPFS TEST - VERSION 1
 ```
 
-Congrats! If your gateway is reachable, we're now ready to add it to Media Network.
+Congrats! If your gateway is reachable, we're now ready to upload files to the network.

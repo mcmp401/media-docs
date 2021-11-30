@@ -16,7 +16,7 @@ IPFS requires 512MiB of memory and can run an IPFS node on a Raspberry Pi. Howev
 
 ### Official distributions
 
-The IPFS team manages the [dist.ipfs.io website](https://dist.ipfs.io/) to help users quickly find the latest version of every IPFS package. As soon as a new release of an IPFS package comes out, it is automatically shown on `dist.ipfs.io`, so you can be sure you're getting the latest software. These steps detail how to download and install Go-IPFS 0.8.0 from `dist.ipfs.io` using the command-line.
+The IPFS team manages the [dist.ipfs.io website](https://dist.ipfs.io/) to help users quickly find the latest version of every IPFS package. As soon as a new release of an IPFS package comes out, it is automatically shown on `dist.ipfs.io`, so you can be sure you're getting the latest software. These steps detail how to download and install Go-IPFS 0.10.0 from `dist.ipfs.io` using the command-line.
 
 ### Install system tools
 
@@ -27,12 +27,12 @@ apt install -y tmux curl nano
 
 1. Download the Linux binary
 ```bash
-wget https://dist.ipfs.io/go-ipfs/v0.8.0/go-ipfs_v0.8.0_linux-amd64.tar.gz
+wget https://dist.ipfs.io/go-ipfs/v0.10.0/go-ipfs_v0.10.0_linux-amd64.tar.gz
 ```
 
 2. Unzip the file
 ```bash
-tar -xvzf go-ipfs_v0.8.0_linux-amd64.tar.gz
+tar -xvzf go-ipfs_v0.10.0_linux-amd64.tar.gz
 ```
 3. Move into the go-ipfs folder and run the install script
 ```bash
@@ -111,11 +111,8 @@ Once you're ready to join your node to the public network, run the ipfs daemon i
 
 ```bash
 ipfs daemon
-```
-
-```
 Initializing daemon...
-go-ipfs version: 0.8.0
+go-ipfs version: 0.10.0
 Repo version: 11
 System version: amd64/linux
 Golang version: go1.15.8
@@ -140,7 +137,6 @@ API server listening on /ip4/127.0.0.1/tcp/5001
 WebUI: http://127.0.0.1:5001/webui
 Gateway (writable) server listening on /ip4/127.0.0.1/tcp/8080
 Daemon is ready
-
 ```
 
 Make a note of the TCP ports you receive. If they are different, use yours in the commands below.
@@ -149,9 +145,6 @@ Now, switch back to your original terminal. If you’re connected to the network
 
 ```bash
 ipfs swarm peers
-```
-
-```bash
 > /ip4/104.131.131.82/tcp/4001/p2p/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ
 > /ip4/104.236.151.122/tcp/4001/p2p/QmSoLju6m7xTh3DuokvT3886QRYqxAzb1kShaanJgW36yx
 > /ip4/134.121.64.93/tcp/1035/p2p/QmWHyrPWQnsz1wxHR219ooJDYTvxJPyZuDUPSDpdsAovN5
