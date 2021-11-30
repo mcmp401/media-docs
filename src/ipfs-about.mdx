@@ -1,0 +1,37 @@
+---
+id: ipfs-about
+title: About
+---
+
+Let's just start with a one-line definition of IPFS:
+
+**IPFS is a distributed system for storing and accessing files, websites, applications, and data.**
+
+What does that mean, exactly? Let's say you're doing some research on aardvarks. (Just roll with it; aardvarks are cool! Did you know they can tunnel 3 feet in only 5 minutes?) You might start by visiting the Wikipedia page on aardvarks at:
+
+```
+https://en.wikipedia.org/wiki/Aardvark
+```
+
+When you put that URL in your browser's address bar, your computer asks one of Wikipedia's computers, which might be somewhere on the other side of the country (or even the planet), for the aardvark page.
+
+However, that's not the only option for meeting your aardvark needs! There's a mirror of Wikipedia stored on IPFS, and you could use that instead. If you use IPFS, your computer asks to get the aardvark page like this:
+
+```
+/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Aardvark.html
+```
+
+:::tip
+The easiest way to view the above link is by opening it in your browser through an _IPFS Gateway_. Simply add `https://ipfs.gateway.name` (A hosted IPFS gateway maintained by The Media Foundation and served using Media Network) to the start of the above link and you'll be able to [view the page →](https://ipfs.gateway.name/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Aardvark.html)
+:::
+
+IPFS knows how to find that sweet, sweet aardvark information by its contents, not its location. The IPFS-ified version of the aardvark info is represented by that string of numbers in the middle of the URL (`QmXo…`), and instead of asking one of Wikipedia's computers for the page, your computer uses IPFS to ask lots of computers around the world to share the page with you. It can get your aardvark info from anyone who has it, not just Wikipedia.
+
+And, when you use IPFS, you don't just download files from someone else — your computer also helps distribute them. When your friend a few blocks away needs the same Wikipedia page, they might be as likely to get it from you as they would from your neighbor or anyone else using IPFS.
+
+IPFS makes this possible for not only web pages but also any kind of file a computer might store, whether it's a document, an email, or even a database record.
+
+### Media Network + IPFS
+
+IPFS integrates easily with Media Network. IPFS is a great protocol to index and host content (like NFTs, live video or even plain websites) in a decentralized way, but lacks a very important component: a Content Delivery Network (CDN) to ultimately serve these files to the end-users using a regular web browser. This tutorial explains to integrate IPFS and Media Network step by step, first by installing IPFS from scratch, configuring it, and then adding it as a resource to the CDN.
+

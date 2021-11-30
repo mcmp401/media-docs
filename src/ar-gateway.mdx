@@ -1,0 +1,186 @@
+---
+id: ar-gateway
+title: Gateway Setup
+---
+
+In the following guide, we will cover all the necessary steps to set up an Arweave gateway.
+
+### Requirements
+
+1. A Unix OS (Debian 10 preferable)
+
+2. Docker and Docker Compose LTS
+
+### Suggested Hardware
+
+There are several million transactions on the Arweave chain. In order to effectively serve content on the gateway you'll need a decent sized computer. The ideal specs for a Gateway should have the following:
+
+1. 16GB RAM (ideally 32GB RAM)
+
+2. ~4TB of SSD storage available
+
+3. Intel i5 / AMD FX or greater, +4 vCPUs should be more than enough, these are typically Intel Xeon CPUs.
+
+### Install Tools
+
+```bash
+sudo apt update; \
+sudo apt -y install tmux curl nano apt-transport-https ca-certificates curl gnupg2 software-properties-common
+```
+
+### Add Docker’s official GPG key:
+
+Import Docker GPG key used for signing Docker packages.
+
+```bash
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+```
+
+### Add the Docker repository to Debian 10
+
+Add Docker repository which contain the latest stable releases of Docker CE.
+
+```bash
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/debian \
+   $(lsb_release -cs) \
+   stable"
+```
+
+### Install Docker
+
+```bash
+sudo apt update; \
+sudo apt -y install docker-ce docker-ce-cli containerd.io
+```
+This installation will add docker group to the system without any users. Add your user account to the group to run docker commands as non-privileged user.
+
+```bash
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+### Check docker and compose version
+
+```bash
+$ docker version
+Client: Docker Engine - Community
+ Version:           19.03.2
+ API version:       1.40
+ Go version:        go1.12.8
+ Git commit:        6a30dfc
+ Built:             Thu Aug 29 05:29:29 2019
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          19.03.2
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.12.8
+  Git commit:       6a30dfc
+  Built:            Thu Aug 29 05:28:05 2019
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.2.6
+  GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
+ runc:
+  Version:          1.0.0-rc8
+  GitCommit:        425e105d5a03fabd737a126ad93d62a9eeede87f
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
+  ```
+
+Log out and log back in so that your group membership is re-evaluated.
+
+```bash
+exit
+```
+### Clone gateway repo
+
+```bash
+git clone https://github.com/mediafoundation/vartex
+```
+### Configure the gateway
+
+First, let's copy the .env 
+
+```bash
+cp .env.example .env
+```
+### Optionally add your own Arweave Node (miner)
+
+```bash
+nano .env
+```
+
+```bash
+ARWEAVE_NODES=["https://arweave.net","http://gateway-4.arweave.net:1984","http://lon-6.eu-west-1.arweave.net:1984"]
+PORT=3000
+PARALLEL=32
+POLLTIME_DELAY_SECONDS=5
+DB_TIMEOUT=30
+HTTP_TIMEOUT_SECONDS=15
+CASSANDRA_CONTACT_POINTS=["localhost:9042"]
+KEYSPACE=gateway
+CASSANDRA_USERNAME=cassandra
+CASSANDRA_PASSWORD=cassandra
+CACHE_IMPORT_PATH="cache/imports"
+```
+
+
+### Build and run Vartex 
+
+```bash
+docker-compose up --build
+```
+
+:::tip
+Make sure you build your docker image every time the .env file is modified in order to apply the new settings.
+:::
+
+
+While developing you can specify a range of blocks you wish to sync,
+the range starts from the most recent known block from the cached hash_list
+down X amount of blocks specified with DEVELOPMENT_SYNC_LENGTH.
+
+```bash
+# for cached block height 1,000,000 would only sync down to 999,900
+DEVELOPMENT_SYNC_LENGTH=100
+```
+
+### Endpoints
+
+You can test if the server and the GraphQL queries are working properly by navigating to.
+
+```bash
+http://localhost:3000/graphql
+```
+
+This webpage should look similar to.
+
+```bash
+https://arweave.net/graphql
+```
+
+### Local Testing
+
+You can now access any content hosted on the Arweave network, for example the file we've just deployed `mytextfile.txt` using Arweave's txID:
+
+```bash
+curl http://localhost:3000/6KZ2ok0JV21mtzUdo5WT_ErcuoLk9-MZcPWLX5LPmK8
+```
+
+```bash
+ARWEAVE TEST - VERSION 1
+```
+
+### Stopping the gateway
+
+You can safely stop the gateway by running:
+
+```bash
+docker-compose down
+```

@@ -1,0 +1,159 @@
+---
+id: ipfs-setup
+title: IPFS CLI Setup
+---
+
+In the following guide, we will cover all the necessary steps to set up an IPFS node, enable a local HTTP gateway, add it to Media Network and then serve its content to end-users through it.
+
+### Installing IPFS node
+
+Installing IPFS through the command-line is handy if you plan on building applications and services on top of an IPFS node. This method is also useful if you're setting up a node without a user interface, usually the case with remote servers or virtual machines. Using IPFS through the command-line allows you to do everything that IPFS Desktop can do, but at a more granular level since you can specify which commands to run.
+
+
+### System requirements
+
+IPFS requires 512MiB of memory and can run an IPFS node on a Raspberry Pi. However, how much disk space your IPFS installation takes up depends on how much data you're sharing. A base installation takes up about 12MB of disk space, and the default maximum disk storage is set to 10GB.
+
+### Official distributions
+
+The IPFS team manages the [dist.ipfs.io website](https://dist.ipfs.io/) to help users quickly find the latest version of every IPFS package. As soon as a new release of an IPFS package comes out, it is automatically shown on `dist.ipfs.io`, so you can be sure you're getting the latest software. These steps detail how to download and install Go-IPFS 0.8.0 from `dist.ipfs.io` using the command-line.
+
+### Install system tools
+
+```bash
+apt update; \
+apt install -y tmux curl nano
+```
+
+1. Download the Linux binary
+```bash
+wget https://dist.ipfs.io/go-ipfs/v0.8.0/go-ipfs_v0.8.0_linux-amd64.tar.gz
+```
+
+2. Unzip the file
+```bash
+tar -xvzf go-ipfs_v0.8.0_linux-amd64.tar.gz
+```
+3. Move into the go-ipfs folder and run the install script
+```bash
+cd go-ipfs
+sudo bash install.sh
+```
+
+4. Check that IPFS installed
+```bash
+ipfs --version
+```
+
+### Initialize the repository
+
+`ipfs` stores all its settings and internal data in a directory called _the repository._ Before using IPFS for the first time, you’ll need to initialize the repository with the `ipfs init` command:
+
+If you are running on a server in a data center, you should initialize IPFS with the `server` profile. Doing so will prevent IPFS from creating a lot of data center-internal traffic trying to discover local nodes:
+
+```bash
+ipfs init --profile server
+```
+
+If you're running it on your personal computer you can initalize it with:
+
+```bash
+ipfs init
+```
+
+```bash
+> initializing ipfs node at /Users/medianetwork/.ipfs
+> generating 2048-bit RSA keypair...done
+> peer identity: Qmcpo2iLBikrdf1d6QU6vXuNb6P7hwrbNPW9kLAH8eG67z
+> to get started, enter:
+>
+>   ipfs cat /ipfs/QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG/readme
+```
+
+The hash after `peer identity:` is your node’s ID and will be different from the one shown in the above output. Other nodes on the network use it to find and connect to you. You can run `ipfs id` at any time to get it again if you need it.
+
+Now, try running the command suggested to you in the output of `ipfs init`. The one that looks like `ipfs cat /ipfs/<HASH>/readme`.
+
+You should see something like this:
+
+```
+Hello and Welcome to IPFS!
+
+██╗██████╗ ███████╗███████╗
+██║██╔══██╗██╔════╝██╔════╝
+██║██████╔╝█████╗  ███████╗
+██║██╔═══╝ ██╔══╝  ╚════██║
+██║██║     ██║     ███████║
+╚═╝╚═╝     ╚═╝     ╚══════╝
+
+If you see this, you have successfully installed
+IPFS and are now interfacing with the ipfs merkledag!
+
+ -------------------------------------------------------
+| Warning:                                              |
+|   This is alpha software. use at your own discretion! |
+|   Much is missing or lacking polish. There are bugs.  |
+|   Not yet secure. Read the security notes for more.   |
+ -------------------------------------------------------
+
+Check out some of the other files in this directory:
+
+  ./about
+  ./help
+  ./quick-start     <-- usage examples
+  ./readme          <-- this file
+  ./security-notes
+```
+
+### Take your node online
+
+Once you're ready to join your node to the public network, run the ipfs daemon in another terminal and wait for all three lines below to appear to know that your node is ready:
+
+```bash
+ipfs daemon
+```
+
+```
+Initializing daemon...
+go-ipfs version: 0.8.0
+Repo version: 11
+System version: amd64/linux
+Golang version: go1.15.8
+Swarm listening on /ip4/10.124.0.2/tcp/4001
+Swarm listening on /ip4/10.124.0.2/udp/4001/quic
+Swarm listening on /ip4/10.48.0.5/tcp/4001
+Swarm listening on /ip4/10.48.0.5/udp/4001/quic
+Swarm listening on /ip4/127.0.0.1/tcp/4001
+Swarm listening on /ip4/127.0.0.1/udp/4001/quic
+Swarm listening on /ip4/141.120.114.66/tcp/4001
+Swarm listening on /ip4/141.120.114.66/udp/4001/quic
+Swarm listening on /ip6/::1/tcp/4001
+Swarm listening on /ip6/::1/udp/4001/quic
+Swarm listening on /p2p-circuit
+Swarm announcing /ip4/127.0.0.1/tcp/4001
+Swarm announcing /ip4/127.0.0.1/udp/4001/quic
+Swarm announcing /ip4/141.120.114.66/tcp/4001
+Swarm announcing /ip4/141.120.114.66/udp/4001/quic
+Swarm announcing /ip6/::1/tcp/4001
+Swarm announcing /ip6/::1/udp/4001/quic
+API server listening on /ip4/127.0.0.1/tcp/5001
+WebUI: http://127.0.0.1:5001/webui
+Gateway (writable) server listening on /ip4/127.0.0.1/tcp/8080
+Daemon is ready
+
+```
+
+Make a note of the TCP ports you receive. If they are different, use yours in the commands below.
+
+Now, switch back to your original terminal. If you’re connected to the network, you should be able to see the IPFS addresses of your peers when you run:
+
+```bash
+ipfs swarm peers
+```
+
+```bash
+> /ip4/104.131.131.82/tcp/4001/p2p/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ
+> /ip4/104.236.151.122/tcp/4001/p2p/QmSoLju6m7xTh3DuokvT3886QRYqxAzb1kShaanJgW36yx
+> /ip4/134.121.64.93/tcp/1035/p2p/QmWHyrPWQnsz1wxHR219ooJDYTvxJPyZuDUPSDpdsAovN5
+> /ip4/178.62.8.190/tcp/4002/p2p/QmdXzZ25cyzSF99csCQmmPZ1NTbWTe8qtKFaZKpZQPdTFB
+```

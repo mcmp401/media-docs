@@ -1,0 +1,34 @@
+---
+id: ipfs-config
+title: IPFS Configuration
+---
+
+
+### Optimize OS
+```bash
+sysctl -w net.core.rmem_max=2500000
+```
+
+### Make your gateway public
+
+By default, your IPFS HTTP gateway is not exposed to the world. It only works locally. Let's allow anyone in with this command to enable it on port 8080:
+
+```bash
+sudo ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
+```
+Please restart the IPFS daemon in order to changes to apply.
+
+### Accessing your HTTP Gateway
+
+Check with curl command if IPFS HTTP gateway is accessible by trying to download the previously added [`mytextfile.txt`](ipfs-setup#adding-files-to-ipfs)
+
+```bash
+curl http://localhost:8080/ipfs/QmS7S76K81Qq5AeHFN5tPL8uDhY3NCCSSSBAD4xaMAq87m
+```
+If everything works smoothly, you should get this:
+
+```bash
+IPFS TEST - VERSION 1
+```
+
+Congrats! If your gateway is reachable, we're now ready to add it to Media Network.

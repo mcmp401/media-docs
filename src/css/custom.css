@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+  :root {
+  --ifm-spacing-horizontal: 1em;
+  --ifm-font-family-base: 'Inter';
+  --ifm-navbar-background-color:rgb(255 255 255 / 0.8);
+  --ifm-gradient:linear-gradient(157deg, rgb(15 255 135 / 1) 0%, rgb(59 195 243) 33%, rgb(217 51 137) 99%, rgba(217,51,137,1) 100%);
+}
+
+.menu--responsive .menu__button {
+  background: var(--ifm-gradient);
+  border: none;
+  color: #fff;
+  box-shadow: 0 1px 1px 0px #000000ba;
+}
+
+
+html[data-theme='dark'] .menu--responsive .menu__button {
+  box-shadow: 0 3px 5px -1px black;
+}
+
+@media only screen and (min-width: 997px) {
+  :root {
+    --ifm-navbar-padding-horizontal: 1.5rem;
+  }
+  .docMainContainer_node_modules-\@docusaurus-theme-classic-src-theme-DocPage- {
+    max-width: calc(100% - 300px);
+  }
+  .navbar {
+    -webkit-backdrop-filter: saturate(180%) blur(5px);
+    backdrop-filter: saturate(180%) blur(5px);
+  }
+}
+@media (max-width: 1320px) and (min-width: 997px) {
+  .docItemWrapper_node_modules-\@docusaurus-theme-classic-src-theme-DocItem- {
+      max-width: 100% !important;
+  }
+}
+
+html[data-theme='dark'] {
+  background-color: #000;
+  --ifm-navbar-background-color:rgb(0 0 0 / 0.8);
+  --ifm-color-primary: #ff86c0;
+  --ifm-color-primary-dark: #fe5eab;
+  --ifm-color-primary-darker: #ff2c91;
+  --ifm-color-primary-darkest: #fb097d;
+  --ifm-color-primary-light: #ff9aca;
+  --ifm-color-primary-lighter: #ffc3e0;
+  --ifm-color-primary-lightest: #ffe7f3;
+  --ifm-toc-border-color:#0e0e0e;
+  --ifm-navbar-shadow: 0 0 0 1px #0e0e0e;
+}
+
+html[data-theme='dark'] .alert--info .admonition,
+html[data-theme='dark'] .alert--info .admonition-icon svg,
+html[data-theme='dark'] .alert--info h5 {
+  color: #3bc3f3;
+  fill: #3bc3f3;
+  stroke: #3bc3f3;
+}
+html[data-theme='dark'] .alert--info {
+  background: transparent;
+  border-color: #3bc3f3;
+  border-width: 2px;
+  color: #fff;
+}
+
+html[data-theme='dark'] .alert--info a,
+html[data-theme='dark'] .alert--secondary a {
+ color:var(--ifm-link-color);
+}
+
+
+html[data-theme='dark'] .alert--secondary {
+  background: transparent;
+  color: var(--ifm-color-secondary);
+  border-width: 2px;
+}
+html[data-theme='dark'] .alert--secondary .admonition,
+html[data-theme='dark'] .alert--secondary .admonition-icon svg,
+html[data-theme='dark'] .alert--secondary h5 {
+  color: var(--ifm-color-secondary);
+  fill: var(--ifm-color-secondary);
+  stroke: var(--ifm-color-secondary);
+}
+
+.menu__list-item .menu__list-item .menu__link--active {
+  font-weight: bold;
+}
+.docSidebarContainer_node_modules-\@docusaurus-theme-classic-src-theme-DocPage- {
+  min-width: 300px;
+}
+.sidebar_node_modules-\@docusaurus-theme-classic-src-theme-DocSidebar- {
+  background-color: #fbfbfb;
+}
+.codeBlockLines_node_modules-\@docusaurus-theme-classic-src-theme-CodeBlock-,
+.codeBlockTitle_node_modules-\@docusaurus-theme-classic-src-theme-CodeBlock- {
+  background-color: rgb(31 31 31) !important;
+}
+html[data-theme='dark'] .sidebar_node_modules-\@docusaurus-theme-classic-src-theme-DocSidebar- {
+  background-color: #000;
+}
+
+hr {
+  --ifm-hr-border-color:#dadde1;
+  --ifm-hr-border-width:1px;
+  border-bottom: 0;
+}
+html[data-theme='dark'] hr {
+  --ifm-hr-border-color:#0e0e0e;
+}
+
+.footer--dark {
+  --ifm-footer-background-color: #0e0e0e;
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(1.5rem); }
+}
+
+main {
+  margin: 1rem 0 5rem 0;
+}
+
+
+
+.docusaurus-highlight-code-line {
+  background-color: rgb(72, 77, 91);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+
+footer .text--center {
+  padding: 2rem 0 0 0;
+}
+
+.tab {
+  border: 1px solid #eaeaea;
+  background: #fbfbfb;
+  padding: 1.5rem;
+  border-radius: 5px;
+  margin-bottom:1rem;
+  cursor:pointer;
+  animation: fadeInUp 400ms backwards;
+  animation-delay: 150ms;
+  transition-property: all;
+  transition-duration: 200ms;
+  }
+  
+.cards__container a {
+  text-decoration: none;
+  color:#000;
+}
+  
+html[data-theme='dark'] .cards__container a {
+  color:#fff;
+}
+
+.tab:hover {
+  transform: translate(0px, -5px);
+}
+
+  .tab h3 {
+  font-weight: 700;
+  }
+  
+  html[data-theme='dark'] .tab {
+  border-color: #333;
+  background: #080808;
+  text-shadow: 0 1px 2px black;
+  }
+  .tab:hover {
+  background: #fbfbfb;
+  }
+  html[data-theme='dark'] .tab:hover {
+  background: var(--ifm-gradient);
+  }
+  html[data-theme='dark'] .tab:hover .lead {
+  color: #fff;
+  text-shadow: 0 1px 2px black;
+  }
+  
+  html[data-theme='dark'] .tab svg {
+  filter: drop-shadow(0 1px 1px black);
+  }
+  
+  .tab .lead {font-size: 1.15rem;}
+
+  .tabs__item:focus {
+    outline: none;
+}

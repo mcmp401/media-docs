@@ -1,0 +1,142 @@
+---
+id: livepeer-media
+title: dCDN Integration
+---
+
+### Integrating a CDN
+
+
+CDN's allow many viewers to view your transcoded video simultaneously while protecting your broadcaster node from being inundated with requests. Any requests that come into your site or DApp for video streaming through Livepeer will pull the video from the network, but will be served off of a CDN.
+
+
+### Pre-requisites
+
+- Make sure you have `livepeer` [installed](livepeer-setup).
+- Make sure your Livepeer broadcaster is [running](livepeer-broadcaster) on ports `8935` and `1935`.
+- Make sure your stream is [playing](livepeer-stream#playback) when directly requesting it from the Livepeer Broadcaster.
+- Make sure you have a compatible Solana SPL wallet with enough MEDIA to use the CDN service. MEDIA is available to buy [here](https://www.coingecko.com/en/coins/media-network#markets).
+
+### Adding your Livepeer broadcaster to Media Network
+
+Using the Media App front-end, add a new CDN resource: 
+
+<center><img src="/img/livepeer-resource.png" width="800"/> </center>
+
+In this specific case, our Livepeer broadcaster node is running at `http://173.230.134.18:8935`
+
+### Finalizing the process
+
+If everything went smoothly and the transaction was approved and confirmed, you'll see your new resource ID and which origin it points to. 
+
+<center><img src="/img/livepeer-added.png" width="800"/> </center>
+
+
+
+<center><img src="/img/livepeer-theo.png" width="800"/> </center>
+
+#### Playback in HTML
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<video id="my-player" controls style="width: 100%; max-width: 500px" />
+
+<script>
+  const videoEl = document.querySelector("#my-player");
+  const src = "http://hostname:8935/stream/stream.m3u8";
+  if (videoEl.canPlayType("application/vnd.apple.mpegurl")) {
+    // Some browers (safari and ie edge) support HLS natively
+    videoEl.src = src;
+  } else if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(src);
+    hls.attachMedia(videoEl);
+  } else {
+    console.error("This is a legacy browser that doesn't support MSE");
+  }
+</script>
+```
+
+#### Playback in React
+
+```js
+import React, { useEffect, useRef } from "react";
+import Hls from "hls.js";
+
+export default function VideoPlayer() {
+  const videoRef = useRef(null);
+  const src = "http://hostname:8935/stream/stream.m3u8";
+
+  useEffect(() => {
+    let hls;
+    if (videoRef.current) {
+      const video = videoRef.current;
+
+      if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        // Some browers (safari and ie edge) support HLS natively
+        video.src = src;
+      } else if (Hls.isSupported()) {
+        // This will run in all other modern browsers
+        hls = new Hls();
+        hls.loadSource(src);
+        hls.attachMedia(video);
+      } else {
+        console.error("This is a legacy browser that doesn't support MSE");
+      }
+    }
+
+    return () => {
+      if (hls) {
+        hls.destroy();
+      }
+    };
+  }, [videoRef]);
+
+  return (
+    <video
+      controls
+      ref={videoRef}
+      style={{ width: "100%", maxWidth: "500px" }}
+    />
+  );
+}
+```
+
+#### Playback in Swift
+
+```swift
+import SwiftUI
+import AVKit
+
+struct ContentView: View {
+    private let player = AVPlayer(url: URL(string: "http://hostname:8935/stream/stream.m3u8")!)
+
+    var body: some View {
+        //  VideoPlayer comes from SwiftUI
+        //  Alternatively, you can use AVPlayerLayer or AVPlayerViewController
+        VideoPlayer(player: player)
+            .onAppear() {
+                player.play()
+            }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+#### Playback in Android
+
+```java
+implementation 'com.google.android.exoplayer:exoplayer-hls:2.X.X'
+
+// Create a player instance.
+SimpleExoPlayer player = new SimpleExoPlayer.Builder(context).build();
+// Set the media item to be played.
+player.setMediaItem(MediaItem.fromUri("http://hostname:8935/stream/stream.m3u8"));
+// Prepare the player.
+player.prepare();
+```

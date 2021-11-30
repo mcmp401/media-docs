@@ -1,0 +1,57 @@
+---
+title: Create a Livestream
+id: ms-stream
+---
+
+Once you've finished installing and configuring your Media Server instance, you're ready to publish your first live stream.
+
+
+:::note
+In case you're just trying to publish a stream without setting up your own Media Server, you can go to <a href="https://mediaserver.express" target="_blank">our hosted Media Server</a> and then follow this guide.
+:::
+
+### Creating a new channel
+
+Click on "Start your stream" to get the details for your channel. You will get the RTMP server and the stream key / password combination required to broadcast your channel.
+
+
+<center><img src="/img/start-stream.png" width="800"/> </center>
+
+### Publishing a Live Stream
+
+:::note
+If you are using your own Media Server instance, make sure you use "rtmp://YOUR.IP.ADDRESS/live/" instead of "rtmp://ingest.mediaserver.express/live/". 
+:::
+:::caution
+Make sure to use the stream key that you've received at the time you've created the stream and not the one in this example.
+:::
+#### Using OBS
+```
+- Settings -> Stream
+- Service: Custom...
+- Server: rtmp://YOUR.IP.ADDRESS/live
+- Stream key: CEHShokZ?pwd=39c197
+```
+:::info
+In this specific example, the `STREAM_NAME` is `CEHShokZ`. Never share the `pwd=` parameter as thats unique for the publisher for the stream security.
+:::
+
+<center><img src="/img/obs-settings2.png" width="800"/> </center>
+
+
+#### Using FFmpeg
+If you have a video source that's already encoded used H.264 video and AAC audio, you can publish using the following command:
+```bash
+ffmpeg -re -i https://server/file.m3u8  \
+-c copy -bsf:a aac_adtstoasc \
+-f flv rtmp://YOUR.IP.ADDRESS/live/CEHShokZ?pwd=39c197
+```
+
+Now that we've setup our Media Server instance and we're publishing our first live stream, it's time to verify if the Media Server instance is working correctly. You can try accessing it directly from your computer with a software like [VLC](https://videolan.org) or any other video player with network capabilities. Just open your stream URL that should look similar to this:
+
+### Local Access to the Stream 
+```
+http://YOUR.IP.ADDRESS:8080/live/STREAM_NAME/index.m3u8
+```
+<center><img src="/img/vlc.png" width="650"/> </center>
+

@@ -1,0 +1,40 @@
+---
+id: ms-media
+title: dCDN Integration
+---
+
+To scale up your streaming plaform to million of users and make it available through a truly powerful and decentralized CDN, you can register your Media Server instance as a new CDN resource. This is done through the [Media App](https://app.media.network), a front-end developed by the Media Foundation to interact with Media Network enabling developers to set up and configure CDN resources.
+
+#### Add a new CDN Resource
+
+<center><img src="/img/ms-mediaapp1.png" width="800"/> </center>
+
+
+#### Change your RTMP ingest URL and CDN URL 
+
+After the transaction is confirmed on the blockchain, a new random subdomain will be assigned to you. This is your new endpoint URL cached by Media Network.
+
+
+<center><img src="/img/ms-mediaapp2.png" width="800"/> </center>
+
+Edit the config file of your Media Server adding this newly generated endpoint. You can also change your ingest RTMP server details here.
+
+```bash
+nano config.js
+```
+
+```js title="mediaserver/config.js"
+const config = {
+//...
+  cdn_url: "https://Resource_ID.medianetwork.cloud",
+  rtmp_url: "rtmp://YOUR.IP.ADDRESS",
+//...
+```
+
+And then run the Media Server again to apply the changes:
+
+```bash
+node app.js
+```
+
+

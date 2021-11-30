@@ -1,0 +1,72 @@
+---
+id: owncast-about
+title: About Owncast
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+***Take control over your content and stream it yourself.***
+
+
+In 2020 the world changed when everyone become stuck in their homes, looking for creative outlets to share their art, skills and themselves from inside their bedroom.
+
+This created an explosion of live streaming on Facebook Live, YouTube Live, Instagram, and Twitch.  These services provided everything they needed, an easy way to live stream to the world, and a chat for users to be a part of their community.
+
+That's when I wanted a better option for people. Something you could run yourself and get all the functionality of these services, where you could live stream to an audience and and allow them to take part in the chat, just like they've been used to on all the other services. **There should be a independent, standalone _Twitch in a Box_.**
+
+Keep in mind that while streaming to the big social companies is always free, you pay for it with your identity and your data, as well as the identity and data of every person that tunes in.  When you self-host anything you'll have to pay with your money instead.  But running a self-hosted live stream server can be done for as cheap as $5/mo, and that's a much better deal than selling your soul to Facebook, Google or Amazon.
+
+***Gabe Kangas - [Owncast project](https://github.com/owncast/owncast)***
+
+---
+
+#### Easy to use
+
+The goal is to have a single service that you can run and it works out of the box.
+
+#### Web interface + chat
+
+Owncast includes a web interface to your video with built-in chat that is available once you start the server.
+The web interface was specifically built to be editable by anybody comfortable tweaking a web page.  It's not bundled or transpiled into anything, it's just HTML + Javascript + CSS that you can start editing.
+
+![Owncast](/img/owncast.png)
+
+#### Use with your existing software
+
+In general Owncast is compatible with any software that uses `RTMP` to broadcast to a remote server. `RTMP` is what all the major live streaming services use, so if you’re currently using one of those it’s likely that you can point your existing software at your Owncast instance instead.
+
+OBS, Streamlabs, Restream and many others are 100% compatible with Owncast.
+
+#### Web-based admin panel
+
+![Owncast](/img/owncast-home.png)
+
+#### Live stats
+
+![Owncast](/img/owncast-viewers.png)
+
+#### Video storage and delivery options
+
+![Home Page](/img/owncast-storage-cdn.png)
+
+<Tabs
+  defaultValue="🖥️ Local Delivery"
+  values={[
+    {label: '🖥️ Local Delivery', value: '🖥️ Local Delivery'},
+    {label: '📤 Owncast + Media Network', value: '📤 Owncast + Media Network'},
+    {label: '🧲 Full Web3 Experience', value: '🧲 Full Web3 Experience'},
+  ]}>
+  <TabItem value="🖥️ Local Delivery">Distribute the content via the same Owncast server. This is the simplest and works out of the box. In this scenario video will be served to the public from the computer that is running the server.  If you have a fast internet connection, enough bandwidth alotted to you, and a small audience (around 10-20 viewers) this may be fine for many people. 
+Have in mind that this will expose your own IP to the world, with the risks involved in that (DDos, Doxing, etc). </TabItem>
+  <TabItem value="📤 Owncast + Media Network">Distribute the content via Media Network's CDN. In this scenario, file availability will depend on your server, but the delivery will be in charge of the CDN. Your original server will remain protected and the IP unknown for any attacker or competitor, plus all the bandwidth
+will be offloaded to the CDN. Instead of serving video directly from your personal server / computer you can use Media Network's CDN service to offload the bandwidth requirements and reach as many end-users as you'd like.</TabItem>
+  <TabItem value="🧲 Full Web3 Experience">Store on Arweave or IPFS and distribute it via Media Network's CDN. In this extreme Web3 experience, your files will be hosted and available forever and then delivered to end-users via the CDN service. No big tech involved! Check our Arweave Integration for more info.</TabItem>
+</Tabs>
+
+---
+
+Project Link: [GitHub](https://github.com/owncast/owncast)
+
+
+
+

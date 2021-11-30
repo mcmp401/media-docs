@@ -1,0 +1,19 @@
+---
+id: peerpool-about
+title: About
+---
+
+Media PeerPool is a CDN agnostic JavaScript library that reduces up to 99% of bandwidth costs for media platforms by leveraging peer-to-peer browser functionality. It works as a peer-assisted solution in which all downloaders of a specific file, or viewers of the same stream share content with each other via WebRTC (allows data sharing to work inside web pages by allowing direct peer-to-peer communication) based on location and latency, reducing the load of the network dramatically, thus improving the overall performance.
+
+###	How it works
+
+Media PeerPool consists of shifting the CDN load back to the clients, following general edge computing ideas. Peer-to-peer video streaming is an excellent example to meet these challenges, and today, two current web standards are here to solve these challenges natively in the browser: Media Source Extensions audio and video tags with multimedia data, and WebRTC to solve the issues around cross-browser peer-to-peer data streaming. 
+
+### Geo-optimized
+The library uses an ISP location and geolocation awareness concept to build WebRTC clusters, where every peer belongs to a specific cluster. Peers from the same provider’s network and geographically close are assigned to the same cluster through WebRTC connections. The system is designed to fulfill every request from peers within its cluster, and in the case of live streaming, if the peer cannot receive the data from the p2p network in time, it will request it from the CDN instead.For connections behind multiple proxies or heavily restricted firewalls, the library uses the STUN protocol to bypass any NAT connectivity issue and establish a direct pipe between peers over WebRTC.
+
+### Standalone Integration
+
+Media PeerPool can be used as a standalone component and save up to 99% of your current CDN costs, even if you are not using Media Network as your primary CDN service. Check out PeerPool's [GitHub](https://github.com/mediafoundation/media-peerpool) repo for updates.
+
+

@@ -1,0 +1,82 @@
+---
+id: ar-media
+title: dCDN Integration
+---
+
+### Add your Arweave gateway to Media Network
+
+To scale up your Arweave gateway to million of users and make it available through a community-powered CDN, you can register your Arweave gateway as a resource on Media Network using the Media App front-end in 2 easy steps.
+
+We're assuming you've already have your SPL wallet loaded with some SOL to pay for transactions fees, and at least the equivalent of 25 MEDIA (LP Tokens from Raydium's MEDIA-USDC pool count towards this) in order to use the CDN service.
+
+### Step 1 - Find out Arweave's gateway port and IP address:
+
+In this step you'll have to find out the details about your Arweave gateway to be able to add it later on to Media Network.
+You can check what is running in each port by exectuing the following command:
+
+```bash
+netstat -ntpl
+```
+
+```bash
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 127.0.0.1:5001          0.0.0.0:*               LISTEN      14732/ipfs          
+tcp        0      0 0.0.0.0:8080            0.0.0.0:*               LISTEN      14732/ipfs          
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1014/sshd           
+tcp        0      0 0.0.0.0:3000            0.0.0.0:*               LISTEN      19072/docker-proxy  
+tcp        0      0 0.0.0.0:5432            0.0.0.0:*               LISTEN      18884/docker-proxy  
+tcp        0      0 0.0.0.0:4001            0.0.0.0:*               LISTEN      14732/ipfs          
+tcp6       0      0 :::22                   :::*                    LISTEN      1014/sshd           
+tcp6       0      0 :::3000                 :::*                    LISTEN      19079/docker-proxy  
+tcp6       0      0 :::5432                 :::*                    LISTEN      18892/docker-proxy
+tcp6       0      0 :::4001                 :::*                    LISTEN      14732/ipfs 
+```
+
+In this case we can check that the docker container running the gateway is running on port ***3000*** under PID ***19079***
+
+Now let's check the external IP address of your device:
+
+```bash
+ifconfig
+```
+
+```bash
+eno1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 141.120.114.66  netmask 255.255.255.0  broadcast 141.120.114.66
+        inet6 fe80::2eea:7fff:fef0:f2fe  prefixlen 64  scopeid 0x20<link>
+        ether 2c:ea:7f:f0:f2:fe  txqueuelen 1000  (Ethernet)
+        RX packets 9245489  bytes 1915123059 (1.7 GiB)
+        RX errors 0  dropped 34  overruns 0  frame 0
+        TX packets 4943558  bytes 970078005 (925.1 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        device interrupt 49  
+
+```
+
+In this case, we can check that the external IP address is ***141.120.114.66*** using the ***eno1*** interface.
+
+This means your Arweave gateway is running at the following URL, which is what you'll need to add as a CDN resource:
+
+```bash
+http://141.120.114.66:3000
+```
+
+### Step 2 - Add your resource to the network
+
+Access the [Media App](https://app.media.network) and connect your SPL wallet.
+
+<iframe frameborder="0" src="/html/home.html" width="100%" height="822px"></iframe>
+
+Add your resource, specifying port number & and approve the transaction:
+
+<iframe frameborder="0" src="/html/arweave-approve.html" width="100%" height="530px"></iframe>
+
+### Finalizing the process
+
+If everything went smoothly and the transaction was approved and confirmed, you'll see your resource ID and which origin it points to. Congrats! Your local Arweave node is now powered and scaled by Media Network. End-users accessing the new link will load the resources from Media Edges around the world instead of your original HTTP gateway.
+
+<iframe frameborder="0" src="/html/arweave-added.html" width="100%" height="530px"></iframe>
+
+
+

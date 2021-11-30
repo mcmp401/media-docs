@@ -1,0 +1,68 @@
+---
+id: ipfs-upload
+title: Upload a File
+---
+
+
+### Adding files to IPFS
+
+You can add any type of content to IPFS. In this case we will put some text content into a `.txt` file called `mytextfile.txt` and put the text `IPFS TEST - VERSION 1` in it.
+
+```bash
+echo "IPFS TEST - VERSION 1" > mytextfile.txt
+```
+You can read the file's contents using the cat command:
+
+```bash
+cat mytextfile.txt
+```
+
+```bash
+IPFS TEST - VERSION 1
+```
+
+```bash
+ipfs add mytextfile.txt
+```
+
+```bash
+added QmS7S76K81Qq5AeHFN5tPL8uDhY3NCCSSSBAD4xaMAq87m mytextfile.txt
+```
+
+Save the hash that IPFS returned. This is the content's cryptographic hash. If the file's content changes, the hash will change, but if the file's content remains the same, the hash will always be the same.
+
+### Downloading files from IPFS
+
+You can now try to download the file you've just uploaded to IPFS
+
+```bash
+ipfs cat QmS7S76K81Qq5AeHFN5tPL8uDhY3NCCSSSBAD4xaMAq87m
+```
+### How IPFS identifies files
+
+IPFS tracks content based on its cryptographic hash. This hash uniquely identifies exactly that content. As long as the content stays the same, the hash stays the same, but if the content changes at all you will get a different hash.
+If you have two different files that contain identical content, IPFS will track that content with one hash. The filenames are different, but the content is the same, so the hash of the content will be identical.
+
+### Make your gateway public
+
+By default, your IPFS HTTP gateway is not exposed to the world. It only works locally. Let's allow anyone in with this command to enable it on port 8080:
+
+```bash
+sudo ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
+```
+Please restart the IPFS daemon in order to changes to apply.
+
+### Accessing your HTTP Gateway
+
+Check with curl command if IPFS HTTP gateway is accessible by trying to download the previously added [`mytextfile.txt`](ipfs-setup#adding-files-to-ipfs)
+
+```bash
+curl http://localhost:8080/ipfs/QmS7S76K81Qq5AeHFN5tPL8uDhY3NCCSSSBAD4xaMAq87m
+```
+If everything works smoothly, you should get this:
+
+```bash
+IPFS TEST - VERSION 1
+```
+
+Congrats! If your gateway is reachable, we're now ready to add it to Media Network.

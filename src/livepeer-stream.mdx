@@ -1,0 +1,32 @@
+---
+id: livepeer-stream
+title: Create a Livestream
+---
+
+### Create a Livestream
+
+Livepeer supports livestreaming using the RTMP protocol, which is supported by
+most broadcast software/hardware as well as open source software for mobile
+applications.
+
+For this guide, we recommend [OBS](https://obsproject.com/download). Once you
+have it downloaded and installed follow these steps to start livestreaming:
+
+1. Navigate to Settings -> Stream
+2. Enter the RTMP Server URL provided by your broadcaster node. If you're running a VPS please use its public IPv4 address. You'll also need to add a stream key such as `stream`
+
+<center><img src="/img/livepeer-obs.png" width="650"/> </center>
+
+3. Make sure to set the `Keyframe Interval` to `2` as seen in the screenshot below. Otherwise the broadcaster node will fail to transcode the stream.
+
+<center><img src="/img/livepeer-obs2.png" width="650"/> </center>
+
+### Playback 
+
+To check if your broadcaster node is working correctly, we'll go ahead and test your livestream, using the playback url that was created for you by
+your broadcaster node.
+
+`http://hostname:8935/stream/stream.m3u8`
+
+Congrats! If the stream plays correctly, it means you've succesfully configured your Livepeer broadcaster node and that your video is being transcoded by the Livepeer protocol.
+

@@ -1,0 +1,109 @@
+---
+id: uniswap-setup
+title: Setup
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+In the following guide, we will cover all the necessary steps to build a Uniswap front-end instance, upload and pin it to IPFS, and then serve it through Media Network’s CDN.
+
+
+### Installing System Tools
+
+```bash
+apt update; \
+apt install -y git nano cat yarn 
+```
+
+### IPFS Setup
+ 
+IPFS is needed to store the Uniswap Interface files. Please check out our [IPFS Integration](ipfs-setup) to learn how to install a node to upload and pin files to the IPFS protocol. This guide assumes you have the ipfs cli installed in your computer/server.
+
+### Clone Uniswap Interface
+
+```bash
+git clone https://github.com/Uniswap/uniswap-interface && cd uniswap-interface && rm src/constants/tokenLists/unsupported.tokenlist.json
+```
+
+### Remove tokens from the unsupported list (optional)
+
+Even if this list won't take any effect outside of the uniswap.org domain we recommend editing it anyway.
+
+```bash
+cat <<EOT >> src/constants/tokenLists/unsupported.tokenlist.json
+{
+  "name": "Unsupported Tokens",
+  "timestamp": "2021-01-05T20:47:02.923Z",
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  "tags": {},
+  "logoURI": "ipfs://QmNa8mQkrNKp1WEEeGjFezDmDeodkWRevGFN8JCV7b4Xir",
+  "keywords": ["uniswap", "unsupported"],
+  "tokens": []
+}
+EOT
+```
+
+### Install & Build 
+
+```bash
+yarn install && yarn build
+```
+
+### Upload & Pin to IPFS
+
+```bash
+ipfs add -r build/
+```
+
+```
+...
+added QmdnoJ44sVG4pqxZyFq7CjAg8ivR3J25VpduAv4DNtXiFx build/451.html
+added QmTjv65tD858mW8k36d175MmTpienFqP6k6KG8AAFnTcF7 build/asset-manifest.json
+added QmfYxrAg1mHYwj2KBk963UFzc1f3oWxrxKVreRYg11z1RR build/favicon.png
+added QmT5w7DU5FaY74fbrnecbqKRSHqje4D56WBtb9FtRTVjEt build/images/192x192_App_Icon.png
+added QmctbEsGDHsC2LyNqP7722yyFaSE5btPRKFpHFyP79cn7o build/images/256x256_App_Icon_Pink.svg
+added QmPh4bVcT3cM3KXD8vNFbNK5qioNpbDYbA92wSPXtd9S3Y build/images/512x512_App_Icon.png
+added QmXnbWjvaiyBMBc6GqD6BC1yy96zgj6vPTBxCq785UtVsb build/index.html
+added QmTr88FsjJi3kn9zdTAiK9BcjPuqsEfR4NAYRDPYwkoP3h build/static/css
+added QmTgTtA9CnpMy8jRXuNu7oixeevPDwEtSPwoe7znaDstMu build/static/js
+added QmZueRQ1onE6kEyLtdeze8KGH1DV8nGJiEhEfwp3EVrirq build/static/media
+added QmYK2hyYy9uRm9xd1G7onQetF9Tq7UgGqKavgGhqFS4vZs build/static
+added QmZ3qrQqgzAxJUpYv8hURRVJf8DYtkiNrdFXFmFU88HDBy build
+30.48 MiB / 30.48 MiB [======================================================] 100.00%
+```
+
+:::note
+Your Uniswap interface is now stored on IPFS. In this example, `QmZ3qrQqgzAxJUpYv8hURRVJf8DYtkiNrdFXFmFU88HDBy` is the main hash for the homepage.
+:::
+
+### Accessing the Interface
+
+#### Option 1: Use Media Network's hosted IPFS gateway
+
+<Tabs
+  defaultValue="👴🏻 Legacy Domain"
+  values={[
+    {label: '👴🏻 Legacy Domain', value: '👴🏻 Legacy Domain'},
+    {label: '🤝 HNS Domain', value: '🤝 HNS Domain'},
+  ]}>
+  <TabItem value="👴🏻 Legacy Domain">https://3ashhppttp.medianet.work/ipfs/QmZ3qrQqgzAxJUpYv8hURRVJf8DYtkiNrdFXFmFU88HDBy/index.html</TabItem>
+  <TabItem value="🤝 HNS Domain">http://3ashhppttp.dCDN/ipfs/QmZ3qrQqgzAxJUpYv8hURRVJf8DYtkiNrdFXFmFU88HDBy/index.html</TabItem>
+</Tabs>
+
+#### Option 2: Use your own IPFS gateway
+
+Add your IPFS node to Media Network's CDN using this [guide](ipfs-media). You'll be able access the Uniswap interface you've just built, through your **own** IPFS Gateway, without relaying on third-parties.
+
+<Tabs
+  defaultValue="👴🏻 Legacy Domain"
+  values={[
+    {label: '👴🏻 Legacy Domain', value: '👴🏻 Legacy Domain'},
+    {label: '🤝 HNS Domain', value: '🤝 HNS Domain'},
+  ]}>
+  <TabItem value="👴🏻 Legacy Domain">https://resourceID.medianet.work/ipfs/QmZ3qrQqgzAxJUpYv8hURRVJf8DYtkiNrdFXFmFU88HDBy/index.html</TabItem>
+  <TabItem value="🤝 HNS Domain">http://resourceID.dCDN/ipfs/QmZ3qrQqgzAxJUpYv8hURRVJf8DYtkiNrdFXFmFU88HDBy/index.html</TabItem>
+</Tabs>

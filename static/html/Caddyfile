@@ -1,0 +1,7 @@
+https:// {
+  header Server "MediaEdge v0.2"
+  reverse_proxy http://localhost:8080
+  tls {
+    on_demand
+  }
+}

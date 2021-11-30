@@ -1,0 +1,59 @@
+---
+id: ar-deploy
+title: Uploading Files
+---
+
+## Adding files to the Arweave network
+
+You can add any type of content to Arweave. In this case we will put some text content into a `.txt` file called `mytextfile.txt` and put the text _"ARWEAVE TEST - VERSION 1"_ in it. Make sure you first install [`arweave-deploy`](https://github.com/ArweaveTeam/arweave-deploy) and load your Arweave wallet with AR tokens to be able to add files to the Arweave Network. You can buy AR in the following [markets](https://www.coingecko.com/en/coins/arweave#markets). In this specific case, the price to deploy a txt file was ***0.000001824540 AR***
+```bash
+echo "ARWEAVE TEST - VERSION 1" > mytextfile.txt
+```
+You can read the file's contents using the cat command:
+
+```bash
+cat mytextfile.txt
+```
+
+```bash
+ARWEAVE TEST - VERSION 1
+```
+Upload mytextfile.txt to Arweave:
+
+```bash
+arweave deploy mytextfile.txt
+```
+
+```bash
+Enter your encryption passphrase to decrypt mcCDEo4G6F5QkHPtouxm64__djLfKr6las39rpKSAOc 
+
+File
+
+Path: mytextfile.txt
+Size: 25.00 Bytes
+
+Transaction
+
+ID: 6KZ2ok0JV21mtzUdo5WT_ErcuoLk9-MZcPWLX5LPmK8
+Price: 0.000001824540 AR
+
+Tags:
+
+ - Content-Type:text/plain
+ - User-Agent:ArweaveDeploy/1.9.1
+
+Wallet
+
+Address: mcCDEo4G6F5QkHPtouxm64__djLfKr6las39rpKSAOc
+Current balance: 2.480000000000 AR
+Balance after uploading: 2.479998175460 AR
+
+Carefully check the above details are correct, then Type CONFIRM to complete this upload CONFIRM
+Your file is deploying! 🚀
+Once your file is mined into a block it'll be available on the following URL
+
+https://arweave.net/6KZ2ok0JV21mtzUdo5WT_ErcuoLk9-MZcPWLX5LPmK8
+
+You can check its status using 'arweave status 6KZ2ok0JV21mtzUdo5WT_ErcuoLk9-MZcPWLX5LPmK8'
+
+```

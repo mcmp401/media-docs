@@ -1,0 +1,137 @@
+---
+title: Playback
+---
+
+
+### Accessing the Stream via Media Network 
+
+In order to use Media Network to serve your content, you'll need to [add your origin](app-setup#step-3) to the network. Once you've done this you will get a new URL to access your resources. The final URL of your stream will look like this:
+
+```
+https://ResourceID.medianetwork.cloud/live/STREAM_NAME/index.m3u8
+```
+You can also access the resource without https:
+
+```
+http://ResourceID.medianetwork.cloud/live/STREAM_NAME/index.m3u8
+```
+
+### Accessing the Stream via Media Network (Web Browser w/ Media PeerPool Support)
+
+Navigate to the resource URL with your dCDN endpoint provided by the Media App with the parameters /v/STREAM_NAME, and replace STREAM_NAME with your custom stream name.
+
+```
+https://ResourceID.medianetwork.cloud/v/STREAM_NAME
+```
+
+<center><img src="/img/ms-playback.png" width="800"/> </center>
+
+Media PeerPool is activated by default, this means that end users watching the same stream will share bandwith between each other and off-load up to 99% of the network usage over WebRTC.
+
+
+#### Playback in HTML
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<video id="my-player" controls style="width: 100%; max-width: 500px" />
+
+<script>
+  const videoEl = document.querySelector("#my-player");
+  const src = "http://ResourceID.medianetwork.cloud/live/STREAM_NAME/index.m3u8";
+  if (videoEl.canPlayType("application/vnd.apple.mpegurl")) {
+    // Some browers (safari and ie edge) support HLS natively
+    videoEl.src = src;
+  } else if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(src);
+    hls.attachMedia(videoEl);
+  } else {
+    console.error("This is a legacy browser that doesn't support MSE");
+  }
+</script>
+```
+
+#### Playback in React
+
+```js
+import React, { useEffect, useRef } from "react";
+import Hls from "hls.js";
+
+export default function VideoPlayer() {
+  const videoRef = useRef(null);
+  const src = "http://ResourceID.medianetwork.cloud/live/STREAM_NAME/index.m3u8;
+
+  useEffect(() => {
+    let hls;
+    if (videoRef.current) {
+      const video = videoRef.current;
+
+      if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        // Some browers (safari and ie edge) support HLS natively
+        video.src = src;
+      } else if (Hls.isSupported()) {
+        // This will run in all other modern browsers
+        hls = new Hls();
+        hls.loadSource(src);
+        hls.attachMedia(video);
+      } else {
+        console.error("This is a legacy browser that doesn't support MSE");
+      }
+    }
+
+    return () => {
+      if (hls) {
+        hls.destroy();
+      }
+    };
+  }, [videoRef]);
+
+  return (
+    <video
+      controls
+      ref={videoRef}
+      style={{ width: "100%", maxWidth: "500px" }}
+    />
+  );
+}
+```
+
+#### Playback in Swift
+
+```swift
+import SwiftUI
+import AVKit
+
+struct ContentView: View {
+    private let player = AVPlayer(url: URL(string: "http://ResourceID.medianetwork.cloud/live/STREAM_NAME/index.m3u8")!)
+
+    var body: some View {
+        //  VideoPlayer comes from SwiftUI
+        //  Alternatively, you can use AVPlayerLayer or AVPlayerViewController
+        VideoPlayer(player: player)
+            .onAppear() {
+                player.play()
+            }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+#### Playback in Android
+
+```java
+implementation 'com.google.android.exoplayer:exoplayer-hls:2.X.X'
+
+// Create a player instance.
+SimpleExoPlayer player = new SimpleExoPlayer.Builder(context).build();
+// Set the media item to be played.
+player.setMediaItem(MediaItem.fromUri("http://ResourceID.medianetwork.cloud/live/STREAM_NAME/index.m3u8"));
+// Prepare the player.
+player.prepare();
+```

@@ -1,0 +1,37 @@
+---
+id: app-setup
+title: Setup
+---
+In the following guide, we will cover all the necessary steps to set up your origin and add your resources to the Media Network, using the Media App front-end. We're assuming you've your SPL wallet loaded with some SOL to pay for transaction fees, and at least the equivalent of 25 MEDIA (LP tokens from the MEDIA-USDC also counts) in order to use the CDN service.
+
+### Step 1
+
+Access the [Media App](https://app.media.network) and connect your SPL wallet. If you don't have one, you can easily create a wallet [here](https://sollet.io). Please make sure you only send SPL tokens to this wallet, or alternative you can transfer assets from Ethereum through the [WormHole Bridge](https://www.wormholebridge.com/#/), [Sollet.io](https://sollet.io) or [FTX](https://ftx.com).
+
+<iframe frameborder="0" src="https://media.network/appexample/home.html" width="100%" height="822px"></iframe>
+
+### Step 2
+
+Create a password and save it. If you ever switch devices it'll be needed to retrieve the encrypted list of resources from the blockchain.
+
+### Step 3
+
+In this step, you'll have to add the domain name or IP where your content is located originally. Add your resource specifying port number & and approve the transaction.
+
+<iframe frameborder="0" src="https://media.network/appexample/ipfs-approve.html" width="100%" height="530px"></iframe>
+
+### Step 4
+
+If everything went smooth and the transaction was approved and confirmed, you'll see your resource ID and which origin points to. Congrats! Your infrastructure is now powered and scaled by Media Network. End-users accessing the new link will load the resources from the Media Edges around the world.
+
+<iframe frameborder="0" src="https://media.network//appexample/ipfs-added.html" width="100%" height="530px"></iframe>
+
+### Step 5 (Coming soon)
+
+Add your new resource as a CNAME for your existing domain. This feature is coming soon!
+
+```
+cdn.domain.com. 300 IN CNAME ResourceID.medianet.work
+```
+The CNAME entry points any references to cdn.domain.com in your site code to Media Network's CDN. For most content management system CDN plugins, simply putting the cdn.domain.com in the plugin configuration will allow site assets to be downloaded from locations across the globe.
+

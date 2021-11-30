@@ -1,0 +1,41 @@
+/* stylelint-disable docusaurus/copyright-header */
+
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+ .tab {
+  border: 1px solid #eaeaea;
+  background: #fbfbfb;
+  padding: 1.5rem;
+  border-radius: 5px;
+  margin-bottom:1rem;
+  cursor:pointer;
+  }
+  
+  .tab h3 {
+  font-weight: 700;
+  }
+  
+  html[data-theme='dark'] .tab {
+  border-color: #333;
+  background: #080808;
+  text-shadow: 0 1px 2px black;
+  }
+  .tab:hover {
+  background: #fbfbfb;
+  }
+  html[data-theme='dark'] .tab:hover {
+  background: var(--ifm-gradient);
+  }
+  html[data-theme='dark'] .tab:hover .lead {
+  color: #fff;
+  text-shadow: 0 1px 2px black;
+  }
+  
+  html[data-theme='dark'] .tab svg {
+  filter: drop-shadow(0 1px 1px black);
+  }
+  
+  .tab .lead {font-size: 1.15rem;}
