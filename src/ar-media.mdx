@@ -8,7 +8,7 @@ title: dCDN Setup
 ### Pre-requisites
 
 - Make sure you have vartex [installed](ar-gateway).
-- Make sure your gateway is [accessible](ar-gateway#local-testing) .
+- Make sure your gateway is [accessible](ar-gateway#local-testing).
 - Make sure you have a compatible wallet with enough MEDIA to use the CDN service. MEDIA is currently available to buy in the following [markets](https://www.coingecko.com/en/coins/media-network#markets).
 
 ### Step 1 - Find out Arweave's gateway port and IP address:
@@ -67,9 +67,15 @@ Access the [Media App](https://app.media.network), connect your wallet and add a
 
 ### Finalizing the process
 
-Congrats! Your Arweave gateway is now powered and scaled by Media Network's dCDN. End-users accessing the new link will load the resources from their closest Media Edge node instead of your original server.
+After the transaction is confirmed on the blockchain, a new random subdomain will be assigned to you. This is your new endpoint URL cached by Media Network.
 
 <center><img src="/img/livepeer-added.png" width="800"/> </center>
+
+Congrats! Your Arweave gateway is now powered and scaled by Media Network's dCDN. End-users accessing the new link will load the resources from their closest Media Edge node instead of your original server.
+
+:::note
+You can now serve any content hosted on IPFS to your end-users, through your **own** Arweave Miner/Gateway via Media's dCDN.
+:::
 
 
 
