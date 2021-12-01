@@ -48,7 +48,7 @@ If everything went smoothly and the transaction was approved and confirmed, you'
 
 <script>
   const videoEl = document.querySelector("#my-player");
-  const src = "http://hostname:8935/stream/stream.m3u8";
+  const src = "http://ResourceID.medianetwork.cloud/stream/stream.m3u8";
   if (videoEl.canPlayType("application/vnd.apple.mpegurl")) {
     // Some browers (safari and ie edge) support HLS natively
     videoEl.src = src;
@@ -70,7 +70,7 @@ import Hls from "hls.js";
 
 export default function VideoPlayer() {
   const videoRef = useRef(null);
-  const src = "http://hostname:8935/stream/stream.m3u8";
+  const src = "http://ResourceID.medianetwork.cloud/stream/stream.m3u8";
 
   useEffect(() => {
     let hls;
@@ -114,7 +114,7 @@ import SwiftUI
 import AVKit
 
 struct ContentView: View {
-    private let player = AVPlayer(url: URL(string: "http://hostname:8935/stream/stream.m3u8")!)
+    private let player = AVPlayer(url: URL(string: "http://ResourceID.medianetwork.cloud/stream/stream.m3u8")!)
 
     var body: some View {
         //  VideoPlayer comes from SwiftUI
@@ -141,7 +141,7 @@ implementation 'com.google.android.exoplayer:exoplayer-hls:2.X.X'
 // Create a player instance.
 SimpleExoPlayer player = new SimpleExoPlayer.Builder(context).build();
 // Set the media item to be played.
-player.setMediaItem(MediaItem.fromUri("http://hostname:8935/stream/stream.m3u8"));
+player.setMediaItem(MediaItem.fromUri("http://ResourceID.medianetwork.cloud/stream/stream.m3u8"));
 // Prepare the player.
 player.prepare();
 ```
