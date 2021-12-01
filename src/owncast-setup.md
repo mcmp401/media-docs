@@ -56,55 +56,6 @@ INFO[2021-06-08T00:50:49Z] Web server is listening on port 8080.
 INFO[2021-06-08T00:50:49Z] The web admin interface is available at /admin. 
 ```
 
-#### Find out Owncast's port:
-
-In this step you'll have to find out the details about your Owncast instance to be able to broadcast to it and also add it later on to Media Network.
-Open a new You can check what is running in each port by executing the following command:
-
-```bash
-netstat -ntpl
-```
-
-```bash
-root@owncast:~# netstat -ntpl
-Active Internet connections (only servers)
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
-tcp        0      0 127.0.0.1:33257         0.0.0.0:*               LISTEN      1292/./owncast      
-tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      600/sshd            
-tcp6       0      0 :::1935                 :::*                    LISTEN      1292/./owncast      
-tcp6       0      0 :::8080                 :::*                    LISTEN      1292/./owncast      
-tcp6       0      0 :::22                   :::*                    LISTEN      600/sshd  
-```
-
-Owncast is running on port ***8080*** for HTTP and ***1935*** for incoming RTMP streams, both under PID ***1292***
-
-#### Find out external IP address of your device:
-
-```bash
-ifconfig
-```
-
-```bash
-eno1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 141.120.114.66  netmask 255.255.255.0  broadcast 141.120.114.66
-        inet6 fe80::2eea:7fff:fef0:f2fe  prefixlen 64  scopeid 0x20<link>
-        ether 2c:ea:7f:f0:f2:fe  txqueuelen 1000  (Ethernet)
-        RX packets 9245489  bytes 1915123059 (1.7 GiB)
-        RX errors 0  dropped 34  overruns 0  frame 0
-        TX packets 4943558  bytes 970078005 (925.1 MiB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-        device interrupt 49  
-
-```
-
-The external IP address is ***141.120.114.66*** using the ***eno1*** interface.
-
-This means your Owncast instance is running at the following URL, which is what we'll need to add as a CDN resource:
-
-```bash
-http://141.120.114.66:8080
-```
-
 :::info
 Your Owncast instance is ready! Just point your OBS or preffered broadcasting software to your IP and path:
 :::
@@ -126,7 +77,8 @@ ffmpeg -re -i http://rt-usa.secure.footprint.net/1105_4500Kb.m3u8 -c copy -bsf:a
 
 You can use tools like `htop` and `bmon` to monitor both hardware resources and bandwidth consumption within the server / computer.
 
-#### Quick install tutorial
 
-<iframe src="https://player.vimeo.com/video/484707748" width="100%" height="600" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+#### Owncast Installation - Quick Video Tutorial
+
+<iframe src="https://player.vimeo.com/video/484707748" width="100%" height="400" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
 

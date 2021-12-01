@@ -1,13 +1,15 @@
 ---
 id: ar-media
-title: dCDN Integration
+title: dCDN Setup
 ---
 
 ### Add your Arweave gateway to Media Network
 
-To scale up your Arweave gateway to million of users and make it available through a community-powered CDN, you can register your Arweave gateway as a resource on Media Network using the Media App front-end in 2 easy steps.
+### Pre-requisites
 
-We're assuming you've already have your SPL wallet loaded with some SOL to pay for transactions fees, and at least the equivalent of 25 MEDIA (LP Tokens from Raydium's MEDIA-USDC pool count towards this) in order to use the CDN service.
+- Make sure you have vartex [installed](ar-gateway).
+- Make sure your gateway is [accessible](ar-gateway#local-testing) .
+- Make sure you have a compatible wallet with enough MEDIA to use the CDN service. MEDIA is currently available to buy in the following [markets](https://www.coingecko.com/en/coins/media-network#markets).
 
 ### Step 1 - Find out Arweave's gateway port and IP address:
 
@@ -16,9 +18,6 @@ You can check what is running in each port by exectuing the following command:
 
 ```bash
 netstat -ntpl
-```
-
-```bash
 Active Internet connections (only servers)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
 tcp        0      0 127.0.0.1:5001          0.0.0.0:*               LISTEN      14732/ipfs          
@@ -39,9 +38,6 @@ Now let's check the external IP address of your device:
 
 ```bash
 ifconfig
-```
-
-```bash
 eno1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 141.120.114.66  netmask 255.255.255.0  broadcast 141.120.114.66
         inet6 fe80::2eea:7fff:fef0:f2fe  prefixlen 64  scopeid 0x20<link>
@@ -64,19 +60,16 @@ http://141.120.114.66:3000
 
 ### Step 2 - Add your resource to the network
 
-Access the [Media App](https://app.media.network) and connect your SPL wallet.
+Access the [Media App](https://app.media.network), connect your wallet and add a new CDN resource. Specify IP, port and approve the transaction.
 
-<iframe frameborder="0" src="/html/home.html" width="100%" height="822px"></iframe>
+<center><img src="/img/livepeer-resource.png" width="800"/> </center>
 
-Add your resource, specifying port number & and approve the transaction:
-
-<iframe frameborder="0" src="/html/arweave-approve.html" width="100%" height="530px"></iframe>
 
 ### Finalizing the process
 
-If everything went smoothly and the transaction was approved and confirmed, you'll see your resource ID and which origin it points to. Congrats! Your local Arweave node is now powered and scaled by Media Network. End-users accessing the new link will load the resources from Media Edges around the world instead of your original HTTP gateway.
+Congrats! Your Arweave gateway is now powered and scaled by Media Network's dCDN. End-users accessing the new link will load the resources from their closest Media Edge node instead of your original server.
 
-<iframe frameborder="0" src="/html/arweave-added.html" width="100%" height="530px"></iframe>
+<center><img src="/img/livepeer-added.png" width="800"/> </center>
 
 
 

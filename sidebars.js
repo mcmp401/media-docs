@@ -3,6 +3,7 @@ module.exports = {
     "About": [
       "about-intro",
       "about-team",
+      "about-terminology",
     ],
     "Media Server": [
       "ms-about",
@@ -47,6 +48,7 @@ module.exports = {
       "livepeer-broadcaster",
       "livepeer-stream",
       "livepeer-media",
+      "livepeer-livepeer.com",
     ],
   },
 };
