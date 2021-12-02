@@ -60,6 +60,10 @@ module.exports = {
               label: "Telegram",
               href: "https://t.me/Media_FDN",
             },
+            {
+              label: "Discord",
+              href: "https://discord.com/invite/wwSw3J7F2j",
+            },
           ],
         },
         {
@@ -72,6 +76,10 @@ module.exports = {
             {
               label: "Whitepaper",
               href: "https://media.network/whitepaper.pdf",
+            },
+            {
+              label: "Coingecko",
+              href: "https://www.coingecko.com/en/coins/media-network",
             },
           ],
         },
