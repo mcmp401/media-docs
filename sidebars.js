@@ -17,31 +17,31 @@ module.exports = {
       "peerpool-demo",
       "peerpool-setup"
     ],
-    "IPFS Integration": [
+    "IPFS": [
       "ipfs-about",
       "ipfs-setup",
       "ipfs-config",
       "ipfs-upload",
       "ipfs-media",
     ],
-    "Arweave Integration": [
+    "Arweave": [
       "ar-about",
       "ar-node",
       "ar-gateway",
       "ar-deploy",
       "ar-media",
     ],
-    "Owncast Integration": [
+    "Owncast": [
       "owncast-about",
       "owncast-setup",
       "owncast-media",
       "owncast-config",
     ],
-    "Uniswap Front-End": [
+    "Uniswap": [
       "uniswap-about",
       "uniswap-setup",
     ],
-    "Livepeer Integration": [
+    "Livepeer": [
       "livepeer-about",
       "livepeer-setup",
       "livepeer-connect",
@@ -49,6 +49,16 @@ module.exports = {
       "livepeer-stream",
       "livepeer-media",
       "livepeer-livepeer.com",
+    ],
+    "Akash": [
+      "akash-about",
+      "akash-setup",
+      "akash-media",
+    ],
+    "Handshake": [
+      "hns-about",
+      "hns-setup",
+      "hns-media",
     ],
   },
 };

@@ -2,7 +2,8 @@
 id: app-setup
 title: Setup
 ---
-In the following guide, we will cover all the necessary steps to set up your origin and add your resources to the Media Network, using the Media App front-end. We're assuming you've your SPL wallet loaded with some SOL to pay for transaction fees, and at least the equivalent of 25 MEDIA (LP tokens from the MEDIA-USDC also counts) in order to use the CDN service.
+*Warning* This tutorial is outdated.
+In the following guide, we will cover all the necessary steps to set up your origin and add your resources to the Media Network, using the Media App front-end. We're assuming you've got your SPL wallet loaded with some SOL to pay for transaction fees, and at least the equivalent of 25 MEDIA (LP tokens from the MEDIA-USDC also counts) in order to use the CDN service.
 
 ### Step 1
 
@@ -26,12 +27,13 @@ If everything went smooth and the transaction was approved and confirmed, you'll
 
 <iframe frameborder="0" src="https://media.network//appexample/ipfs-added.html" width="100%" height="530px"></iframe>
 
-### Step 5 (Coming soon)
+### Step 5 
 
-Add your new resource as a CNAME for your existing domain. This feature is coming soon!
+Add your new resource as a CNAME for your existing domain. 
 
 ```
 cdn.domain.com. 300 IN CNAME ResourceID.medianet.work
 ```
+
 The CNAME entry points any references to cdn.domain.com in your site code to Media Network's CDN. For most content management system CDN plugins, simply putting the cdn.domain.com in the plugin configuration will allow site assets to be downloaded from locations across the globe.
 
