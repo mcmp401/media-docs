@@ -2,8 +2,11 @@ module.exports = {
   docs: {
     "About": [
       "about-intro",
-      "about-team",
+      "about-tech",
+      "about-faq",
       "about-terminology",
+      "about-dao",
+      "about-foundation",
     ],
     "Media Server": [
       "ms-about",
@@ -26,7 +29,7 @@ module.exports = {
     ],
     "Arweave": [
       "ar-about",
-      "ar-node",
+      "ar-miner",
       "ar-gateway",
       "ar-deploy",
       "ar-media",

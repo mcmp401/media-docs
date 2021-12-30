@@ -3,13 +3,33 @@
 title: About
 id: hns-about
 ---
+Since we started working on this project, we knew that domain names were one of the key points to solve as the namespace owner (i.e., .com, .net) could ultimately censor Media Network’s CDN resources. Today, we’re excited to announce our Handshake (HNS) integration: Web2 legacy and HNS .dcdn/ TLD are enabled by default for all resources created on the network.
 
-Media Server is an open-source software that allows you to transcode, broadcast, and serve live video and audio streams. Currently, Media Server supports RTMP as input format and HLS as output format. [Media PeerPool](peerpool-about) is integrated by default, meaning that you can also benefit from its peer-to-peer capabilities out of the box.
 
-### Deploy your own streaming platform in minutes
-Media Server allows anybody with a VPS or dedicated server to start a streaming platform. But what if you wanted to scale and serve video to millions of users? Your VPS wouldn't be enough to deliver the thousands of gigabytes of data per second required to do so. That's where Media Network comes into play.
+### What is Handshake?
+Handshake (HNS) is a censorship-resistant naming protocol that stores top-level domain (TLD) ownership data on its blockchain, thus eliminating the need for authorities like ICANN or domain lenders like GoDaddy/Namecheap. The consensus protocol within Handshake replaces the ICANN root servers. Traditionally, the recursive server would point to the root zone file to locate the IP address. The recursive resolvers would point to an authoritative name server committed to the blockchain rather than ICANN’s root zone file. As Handshake is similar to the legacy DNS record system, developers can also point their custom HNS domain to Media Network’s .dcdn resources. When editing DNS blockchain records for your vanity HNS domain, we recommend using an ALIAS instead of a CNAME such as:
+vanity.hnsTLD. 300 IN ALIAS kkexa3n1gp.dcdn
 
-Setting up a Media Server instance and adding it to Media’s CDN through a front-end like the [Media App](https://app.media.network) will allow Media Edges to pull the content from your origin server and make it available to your end-users. By using Media Network as your CDN, you'll be able to hold millions of viewers without stressing your infrastructure and without exposing your original server IP address, eliminating the risk of a direct DDoS attack.
+Media Server & Media PeerPool running on Media Network’s CDN using a Handshake TLD.
 
-### Hosted Version: Media Server Express
-If you'd like to stream or test the network but can't install a Media Server instance, feel free to try our hosted <a href="https://mediaserver.express" target="_blank">Media Server</a> powered by Media Network.
+
+### Why is this needed?
+
+The Domain Name System (DNS) is one of the most critical internet services in existence. Without it, we wouldn’t be able to access any online service. Domain names are the most valuable assets on the Internet, but we don’t own them. Namespaces like “.com” or “.net” ultimately rely on centralized actors with complete control over a system that is relied upon to be honest; vulnerable to hacking, corruption, and censorship. If your domain lives on these centralized namespaces controlled by governments and corporations, your right to exist effectively belongs to someone else, as they can remove you from the web with the stroke of a keyboard.
+DNS Root Servers
+Today, the DNS root servers worldwide help our computers find and reach the desired addresses by translating IP addresses into readable names that everyone can understand. DNS root servers remain one of the weakest points in internet infrastructure. Authority over the root zone belongs to the National Telecommunications and Information Administration (NTIA; an agency of the United States Department of Commerce). The NTIA then delegates management of the root zone to the Internet Corporation for Assigned Names and Numbers (ICANN). ICANN operates servers for one of the 13 IP addresses in the root zone and delegates the other 12 IP addresses to various organizations. These include the University of Maryland, NASA, and Verisign, which is the only organization that operates two of the root IP addresses. The power to enforce monopolies also makes these centralized namespaces some of the most valuable properties on the Internet today. Verisign makes billions a year controlling .com, while ICANN has the power to raise price caps of entire TLDs arbitrarily. The Internet was supposed to be kingless, but their ability to strike away websites makes the owners of these namespaces the de-facto kings/governors.
+
+The 13 DNS Root Servers
+
+### Let’s Decentralize DNS
+The idea of replacing Certificate Authorities with a blockchain solution has been around since the early days of crypto. After all, the Domain Name System (DNS) is essentially a protocol for maintaining a secure, distributed list of URLs pointing to IP addresses. And what is a blockchain but a more secure, distributed way of keeping a linked list? If a secure, performant blockchain supplanted the antiquated CA system, the Internet’s resiliency to both attack and censorship would take a significant leap forward.
+
+### About Handshake
+Handshake top-level domains are digital assets that you own, just like NFTs. By pointing your browser to resolve requests via the Handshake network instead of at your local DNS resolving server, you’ll essentially be looking up websites’ IP addresses on the Handshake blockchain instead of those maintained on DNS resolvers that are centralized. Handshake names can function as traditional top-level domains like .com or .org. Learn more about handshake by reading their documentation.
+
+### Accessing Handshake Names
+While Handshake isn’t supported in most major browsers (yet), there are multiple ways for end-users to access decentralized domains. The easiest way is using HDNS and NextDNS managed resolvers. Just change your browser’s settings and point to a Handshake resolver. Have in mind you’ll be trusting someone else’s DNS resolver to find the correct records. In this case, we’re using: https://query.hdns.io/dns-query, which also resolves legacy DNS domains so that regular websites will work without any issues.
+
+Resolving HNS domains is as easy as changing your browser settings.
+
+hds is a Handshake daemon & full node, which lets you resolve domains locally. This way, you’ll be querying the blockchain directly for correct records with no man in the middle. Bob Wallet is a desktop application for DNS management and name auctions on Handshake. Learn more about accessing HNS domains.

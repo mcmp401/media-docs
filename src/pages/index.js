@@ -12,7 +12,7 @@ const features = [
     imageUrl: "about-intro",
     description: (
       <>
-         A new architecture for a highly-scalable, peer-to-peer and censorship-resistant CDN.
+         A new architecture for a highly-scalable, decentralized and censorship-resistant dCDN.
       </>
     ),
   }, //
