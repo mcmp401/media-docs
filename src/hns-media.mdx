@@ -3,48 +3,8 @@ id: hns-media
 title: dCDN Setup
 ---
 
-To scale up your streaming plaform to million of users and make it available through a truly powerful and decentralized CDN, you can register your Media Server instance as a new CDN resource. This is done through the [Media App](https://app.media.network), a front-end developed by the Media Foundation to interact with Media Network enabling developers to set up and configure CDN resources.
+Coming soon! Decentralized domains + Decentralized CDN.
 
-### Pre-requisites
+### Using the built in HNS domain to resolve dCDN resources (.dCDN/)
 
-- Make sure you have Media Server instance [installed](ms-setup) and running.
-- Make sure your Media Server instance is [accessible](ms-setup#testing-the-server).
-- Make sure you have a compatible wallet with enough MEDIA to use the CDN service. MEDIA is currently available to buy in the following [markets](https://www.coingecko.com/en/coins/media-network#markets).
-
-
-#### Add a new CDN Resource
-
-<center><img src="/img/ms-add.png" width="800"/> </center>
-
-
-#### Change your RTMP ingest URL and CDN URL 
-
-After the transaction is confirmed on the blockchain, a new random subdomain will be assigned to you. This is your new endpoint URL cached by Media Network.
-
-
-<center><img src="/img/ms-resource.png" width="800"/> </center>
-
-Edit the config file of your Media Server adding this newly generated endpoint. You can also change your ingest RTMP server details here.
-
-```bash
-nano config.js
-```
-
-```js title="mediaserver/config.js"
-const config = {
-//...
-  cdn_url: "https://Resource_ID.medianetwork.cloud",
-  rtmp_url: "rtmp://YOUR.IP.ADDRESS",
-//...
-```
-
-And then run the Media Server again to apply the changes:
-
-```bash
-node app.js
-```
-
-:::note
-Congrats! Your Media Server instance is now powered and scaled by Media Network's dCDN. End-users accessing the new link will load the resources from their closest Media Edge node instead of your original server.
-:::
-
+### Pointing your custom HNS domain to a dCDN resource (CNAME)
