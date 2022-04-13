@@ -34,6 +34,11 @@ module.exports = {
       "ar-deploy",
       "ar-media",
     ],
+    "Storj": [
+      "storj-about",
+      "storj-setup",
+      "storj-media",
+    ],
     "Owncast": [
       "owncast-about",
       "owncast-setup",
@@ -52,11 +57,6 @@ module.exports = {
       "livepeer-stream",
       "livepeer-media",
       "livepeer-livepeer.com",
-    ],
-    "Akash": [
-      "akash-about",
-      "akash-setup",
-      "akash-media",
     ],
     "Handshake": [
       "hns-about",

@@ -1,0 +1,158 @@
+---
+title: Setup
+id: storj-setup
+---
+### Storj DCS S3 Gateway
+
+It can be used as an origin for public and private Storj buckets via the Storj DCS S3 Gateway. 
+
+:::note
+Storj DCS is a decentralized object storage service that is S3 compatible and end-to-end encrypted by default.
+:::
+
+### Pre-requisites
+
+- OS: Debian 11
+- [Storj DCS account](https://www.storj.io/signup/)
+- [Project and access credentials](https://docs.storj.io/dcs/getting-started/quickstart-uplink-cli/uploading-your-first-object/create-first-access-grant/)
+
+<center><img src="/img/storj-api.png" width="100%"/> </center>
+
+### Install dependencies
+
+```bash
+apt install unzip
+```
+
+### Installing the Storj Gateway
+
+Download, unzip, and install the binary
+
+```bash
+curl -L https://github.com/storj/gateway-st/releases/latest/download/gateway_linux_amd64.zip -O && unzip gateway_linux_amd64.zip; \
+chmod 755 gateway; \
+sudo mv gateway /usr/local/bin/gateway
+```
+
+### Interactive Setup
+
+Setup your S3 gateway by running the following command and following the instructions provided by the wizard.
+Enter the numeric choice or satellite address corresponding to the satellite you’ve created your account on.
+The satellite address should be entered as `<nodeid>@<address>:<port>` for example: `12L9ZFwhzVpuEKMUNUqkaTLGzwY9G24tbiigLiXpmZWKwmcNDDs@eu1.storj.io:7777`, or just use the number from the list.
+
+```bash
+root@6255deca2f353900013ffbe1:~# gateway setup
+Select your satellite:
+	[1] us1.storj.io
+	[2] eu1.storj.io
+	[3] ap1.storj.io
+Enter number or satellite address as "<nodeid>@<address>:<port>" [1]: 1
+Enter your API key: 1dfJ8UityiNP47FV2Nu3FdEBF1vj8buzKM5X9L24Cudm4kpRzY45AfE5UTjmKQRaYzyYd1eRnXYykjUWgAEfTrrzpu77JXbBWEDgaKqwQfeBx1PH4jYn
+Enter your encryption passphrase: 
+Enter your encryption passphrase again: 
+
+With your permission, Storj DCS can automatically collect anonymized analytics information from your S3 Gateway and send it to Storj Labs (makers of Storj DCS) to help improve the quality and performance of our products.
+Do you agree to submit such information to Storj Labs (y/N): n
+
+Your S3 Gateway is configured and ready to use!
+```
+
+### Editing the config 
+
+You can see the path to the default config file config.yaml with this command:
+
+```bash
+gateway help
+```
+
+### Hosting a static website 
+
+Make sure you make the following changes if you're planning to host a website. ```server.address``` exposes the local interface to the public internet.
+
+```js title="~/.local/share/storj/gateway/config.yaml"
+//...
+# address to serve S3 api over
+server.address: 0.0.0.0:7777
+# serve content as a static website
+website: true
+//...
+```
+
+### Local Caching 
+
+You can use the Minio caching technology in conjunction with the hosting of a static website.   
+The following example uses /mnt/drive1, /mnt/drive2 ,/mnt/cache1 … /mnt/cache3 for caching, while excluding all objects under bucket mybucket and all objects with ‘.pdf’ extensions on a S3 Gateway setup. Objects are cached if they have been accessed three times or more. Cache max usage is restricted to 80% of disk capacity in this example. Garbage collection is triggered when the high watermark is reached (i.e. at 72% of cache disk usage) and will clear the least recently accessed entries until the disk usage drops to the low watermark - i.e. cache disk usage drops to 56% (70% of 80% quota).
+
+Export the environment variables before running the Gateway:
+
+```bash
+export MINIO_CACHE="on"
+export MINIO_CACHE_DRIVES="/mnt/drive1,/mnt/drive2,/mnt/cache{1...3}"
+export MINIO_CACHE_EXCLUDE="*.pdf,mybucket/*"
+export MINIO_CACHE_QUOTA=80
+export MINIO_CACHE_AFTER=3
+export MINIO_CACHE_WATERMARK_LOW=70
+export MINIO_CACHE_WATERMARK_HIGH=90
+```
+
+:::warning
+Setting `MINIO_BROWSER=off` env variable would disable the Minio browser capabilites. This would make sense if running the gateway as a static website or as CDN origin in production.
+:::
+
+### Running the Gateway 
+
+```bash
+root@NLDW4-3-42-40:~# gateway run
+2022-04-04T06:21:34.903+0200	INFO	Configuration loaded	{"Location": "/root/.local/share/storj/gateway/config.yaml"}
+2022-04-04T06:21:34.903+0200	INFO	Telemetry enabled	{"instance ID": "2c:ea:7f:f0:f2:fe"}
+2022-04-04T06:21:34.903+0200	INFO	Starting Storj DCS S3 Gateway
+2022-04-04T06:21:34.903+0200	INFO	Endpoint: 0.0.0.0:7777
+2022-04-04T06:21:34.903+0200	INFO	Access key: *************
+2022-04-04T06:21:34.903+0200	INFO	Secret key: *************
+```
+
+### Login to Minio 
+
+<center><img src="/img/storj-minio.png" width="800"/> </center>
+
+### Create a bucket & upload a file
+
+To test this we'll just drop an `index.html` text-only file using drag & drop
+
+<center><img src="/img/storj-bucket.png" width="800"/> </center>
+
+### Testing your gateway 
+
+Before adding it to Media's dCDN, we're going to make sure the gateway is working by trying to reach the previously uploaded file/website with curl or a web browser:
+
+```bash
+root@6255deca2f353900013ffbe1:~# curl -v http://localhost:7777/demo-bucket/index.html
+*   Trying 127.0.0.1:7777...
+* Connected to localhost (127.0.0.1) port 7777 (#0)
+> GET /demo-bucket/index.html HTTP/1.1
+> Host: localhost:7777
+> User-Agent: curl/7.74.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Accept-Ranges: bytes
+< Content-Length: 16
+< Content-Security-Policy: block-all-mixed-content
+< Content-Type: text/html
+< ETag: "a9a0ace4e5798ad535b989829e805bec"
+< Last-Modified: Mon, 04 Apr 2022 04:30:36 GMT
+< Server: MinIO
+< Vary: Origin
+< X-Amz-Request-Id: 16E5428E3F0B1C24
+< X-Xss-Protection: 1; mode=block
+< s3:etag: a9a0ace4e5798ad535b989829e805bec
+< Date: Tue, 12 Apr 2022 21:13:37 GMT
+< 
+* Connection #0 to host localhost left intact
+
+
+Storj + Media :) 
+```
+
+<center><img src="/img/storj-index.png" width="800"/> </center>

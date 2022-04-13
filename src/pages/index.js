@@ -39,6 +39,11 @@ const features = [
     description: <>Install and run an Arweave gateway using Media Network as the distribution layer.</>,
   },
   {
+    title: <>Storj Integration</>,
+    imageUrl: "storj-about",
+    description: <>Install and run a Storj DCS gateway using Media Network as the distribution layer.</>,
+  },
+  {
     title: <>Owncast Integration</>,
     imageUrl: "owncast-about",
     description: <>Take control over your content and stream it yourself with Owncast + Media Network.</>,
