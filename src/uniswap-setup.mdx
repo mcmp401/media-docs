@@ -5,7 +5,7 @@ title: Setup
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-In the following guide, we will cover all the necessary steps to build a Uniswap front-end instance, upload and pin it to IPFS, and then serve it through Media Network’s CDN.
+In the following guide, we will cover all the necessary steps to build a Uniswap front-end instance, upload and pin it to IPFS, and then serve it through Media's decentralized CDN.
 
 
 ### Installing System Tools
@@ -82,19 +82,7 @@ Your Uniswap interface is now stored on IPFS. In this example, `QmZ3qrQqgzAxJUpY
 
 ### Accessing the Interface
 
-#### Option 1: Use Media Network's hosted IPFS gateway
-
-<Tabs
-  defaultValue="👴🏻 Legacy Domain"
-  values={[
-    {label: '👴🏻 Legacy Domain', value: '👴🏻 Legacy Domain'},
-    {label: '🤝 HNS Domain', value: '🤝 HNS Domain'},
-  ]}>
-  <TabItem value="👴🏻 Legacy Domain">https://ipfs.gateway.name/ipfs/QmZ3qrQqgzAxJUpYv8hURRVJf8DYtkiNrdFXFmFU88HDBy/index.html</TabItem>
-  <TabItem value="🤝 HNS Domain">http://klmfttsatl.dcdn/ipfs/QmZ3qrQqgzAxJUpYv8hURRVJf8DYtkiNrdFXFmFU88HDBy/index.html</TabItem>
-</Tabs>
-
-#### Option 2: Use your own IPFS gateway
+Use your own IPFS gateway
 
 Add your IPFS node to Media Network's CDN using this [guide](ipfs-about). You'll be able access the Uniswap interface you've just built, through your **own** IPFS Gateway, without relaying on third-parties.
 
