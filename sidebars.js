@@ -12,6 +12,7 @@ module.exports = {
       "media-edge-about",
       "media-edge-setup",
       "media-edge-registration",
+      "media-edge-troubleshooting",
     ],
     "Media Server": [
       "ms-about",
@@ -25,6 +26,7 @@ module.exports = {
       "peerpool-demo",
       "peerpool-setup"
     ],
+
     "IPFS": [
       "ipfs-about",
       "ipfs-setup",
