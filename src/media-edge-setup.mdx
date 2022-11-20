@@ -1,0 +1,21 @@
+---
+title: Setup
+id: media-edge-setup
+---
+
+In the following guide, we will cover all the necessary steps to set up a Media Server instance on your own server or computer from scratch.
+
+### Minimum Requirements 
+- Debian 10
+- 512mb RAM
+- 1 Core
+
+### Install System Tools and Node.js
+```bash
+apt update; \
+apt install -y git curl nano xz-utils; \
+curl -sL https://deb.nodesource.com/setup_15.x | bash -; \
+apt install -y nodejs
+```
+
+<center><img src="/img/mediaserver3.png" width="800"/> </center>
