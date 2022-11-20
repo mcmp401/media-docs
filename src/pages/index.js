@@ -17,6 +17,11 @@ const features = [
     ),
   }, //
   {
+    title: <>Media Edge</>,
+    imageUrl: "media-edge-about",
+    description: <>Participate in the network as a node provider and receive MEDIA rewards.</>
+  },
+  {
     title: <>Media PeerPool</>,
     imageUrl: "peerpool-about",
     description: <>A peer-assisted solution enabling end users to share content between each other.</>
@@ -25,13 +30,13 @@ const features = [
   {
     title: <>Media Server</>,
     imageUrl: "ms-about",
-    description: <>Build a simple live streaming platform using Media Server and Media Network.</>,
+    description: <>Build a simple live streaming platform using Media Server and Media Network.</>
   },
 
   {
     title: <>IPFS Integration</>,
     imageUrl: "ipfs-about",
-    description: <>Install and run an IPFS node serving its content to the world through Media Network.</>,
+    description: <>Install and run an IPFS node serving its content to the world through Media Network.</>
   },
   {
     title: <>Arweave Integration</>,
@@ -41,22 +46,22 @@ const features = [
   {
     title: <>Storj Integration</>,
     imageUrl: "storj-about",
-    description: <>Install and run a Storj DCS gateway using Media Network as the distribution layer.</>,
+    description: <>Install and run a Storj DCS gateway using Media Network as the distribution layer.</>
   },
   {
     title: <>Owncast Integration</>,
     imageUrl: "owncast-about",
-    description: <>Take control over your content and stream it yourself with Owncast + Media Network.</>,
+    description: <>Take control over your content and stream it yourself with Owncast + Media Network.</>
   },
   {
     title: <>Uniswap Front-End</>,
     imageUrl: "uniswap-about",
-    description: <>Run an Uniswap front-end with your own rules, powered by IPFS & Media Network</>,
+    description: <>Run an Uniswap front-end with your own rules, powered by IPFS & Media Network</>
   },
   {
     title: <>Livepeer</>,
     imageUrl: "livepeer-about",
-    description: <>Learn how to transcode your videos with Livepeer and deliver them via Media's CDN</>,
+    description: <>Learn how to transcode your videos with Livepeer and deliver them via Media's CDN</>
   },
 ];
 

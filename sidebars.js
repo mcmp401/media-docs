@@ -8,6 +8,11 @@ module.exports = {
       "about-dao",
       "about-foundation",
     ],
+    "Media Edge": [
+      "media-edge-about",
+      "media-edge-setup",
+      "media-edge-registration",
+    ],
     "Media Server": [
       "ms-about",
       "ms-setup",

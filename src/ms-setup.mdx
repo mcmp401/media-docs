@@ -21,7 +21,8 @@ apt install -y nodejs
 ### Install FFmpeg
 ```bash
 cd /tmp; \
-wget https://media.network/static/ffmpeg-release-amd64-static.tar.xz; \
+rm -r ffmpeg*; \
+wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz; \
 tar xvf ffmpeg-release-amd64-static.tar.xz; \
 cd /tmp/ffmpeg-*/; \
 mv ffmpeg ffprobe /usr/bin/;
