@@ -10,8 +10,8 @@ module.exports = {
   themeConfig: {
     image: "https://media.network/images/mediasocial.jpg",
     colorMode: {
-        disableSwitch: false,
-      },
+      disableSwitch: false,
+    },
     sidebarCollapsible: true,
     navbar: {
       title: "Documentation",
@@ -92,7 +92,7 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          routeBasePath: "/",
+          routeBasePath: "/about-intro",
           path: "src",
           sidebarPath: require.resolve("./sidebars.js"),
         },
