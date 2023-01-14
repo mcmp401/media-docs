@@ -3,3 +3,46 @@ title: Troubleshooting
 id: media-edge-troubleshooting
 ---
 
+
+### Verifying the Integrity of Content Served from a Media Edge
+
+Today's the most common way to verify that you have received or downloaded the proper file is to compute a checksum and compare it against one calculated by a reliable source. SHA-512 is frequently used to compute checksums -because it is unlikely that two different files will ever have the same checksum. A checksum is a particular type of hash used to verify the integrity of a file. 
+
+#### Bad Data? SHA-512 and SRI To The Rescue!
+
+Subresource Integrity (SRI) is a security feature that enables browsers to verify that the resources they fetch (for example, from a CDN) are delivered without unexpected manipulation. It works by providing a cryptographic hash that a fetched resource must match. This is achieved by comparing the content with a cryptographic digest contained within the surrounding HTML tag. SRI makes sure that your files have been delivered without a third party modifying them on the fly. SRI and the integrity attribute ensure that the file you linked to a page never changes. And if it does change, then the browser will reject it. Checking that code hasn’t changed is an old computer science problem with well-established solutions. SRI adopts the simplest — file hashing.
+
+#### File Hashing
+
+File hashing is taking a file and running it through an algorithm that reduces it to a short string representation, known as a hash or checksum. The process is either repeatable or reversible, so much so that if you give someone else a file along with the hash, they’d be able to run the same algorithm to check that the two match. If the file changes or the hash changes, then there’s no longer a match, and you know something is wrong and should distrust the file. When using SRI, your webpage holds the hash and the server (CDN or anywhere) holds the file. The browser downloads the file, then quickly computes it to ensure that it matches the hash in the integrity attribute. If it matches, the file is used; if not, it is blocked. This is key for any DeFi front-end to avoid allowing users to load hijacked websites and the subsequent loss of customers’ funds, such as Badger DAO’s front-end hack.
+
+:::info
+“BadgerDAO, a DeFi protocol for earning yield with tokenized Bitcoin on Ethereum, has fallen victim to an attack. The hacker reportedly added a malicious script to the protocol’s frontend website, prompting users to approve a smart contract transaction giving the script unlimited permission to drain funds from their wallets” https://cryptobriefing.com/120m-lost-badgerdao-defi-hack/.
+:::
+
+#### Using Subresource Integrity
+
+SRI feature is easily implemented by specifying a base64-encoded cryptographic hash of a resource (file) you’re telling the browser to fetch in the value of the integrity attribute of any ```<script>``` or ```<link>``` element.
+
+An integrity value begins with at least one string. Each string includes a prefix indicating a particular hash algorithm (currently, the allowed prefixes are sha256, sha384, and sha512), followed by a dash, ending with the actual base64-encoded hash.
+
+:::note An integrity value’s “hash” part is, strictly speaking, a cryptographic digest formed by applying a particular hash function to some input (for example, a script or stylesheet file).
+:::
+
+```js
+<script src="https://resourceid.medianetwork.cloud/jquery.min.js" 
+integrity="sha256-C6CB9UYIS9UJeqinPHWTHVq…" crossorigin="anonymous"></script>
+
+# Failover back to origin if the hash doesn't match
+
+<script>window.jQuery || document.write('<script src="https://origin.com/jquery-.min.js">
+<\/script>')</script>
+```
+
+#### Content Moderation / Inappropriate content
+
+Media Network is a revolutionary decentralized marketplace for CDN services, which means that it does not host or store any content on its own. Unlike traditional hosting providers or storage protocols, it cannot remove content from the internet that it does not host. However, the decentralized nature of the protocol allows for a more secure and transparent system, where control is placed back in the hands of MEDIA holders.
+
+The Media Foundation, which is responsible for the development and maintenance of the protocol, does not have the power to control or censor the resources created on the network, as everything is recorded on the blockchain and signed with users' wallets. This means that the foundation does not have the authority to stop a deal between a provider and a client, as all transactions happen on the blockchain.
+
+Providers participating in the network are responsible for moderating their services according to their own jurisdiction and local laws. This means that providers must ensure that their offers comply with the laws and regulations of their respective countries. The protocol also includes a dispute resolution mechanism in case of disagreements between parties. This allows for a transparent and fair system, where issues can be handled in a democratic and decentralized manner.
